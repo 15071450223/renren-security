@@ -10,8 +10,8 @@
 <body>
 <div class="panel panel-default">
     <div class="panel-heading">基本信息</div>
-    <div style="padding: 10px 0 20px 10px;">
-        <h3>&nbsp;&nbsp;&nbsp;项目介绍</h3>
+    <div style="padding: 10px 10px 10px 10px;" id="main" v-cloak>
+        <!--<h3>&nbsp;&nbsp;&nbsp;项目介绍</h3>
         <ul>
             <li>采用Spring、MyBatis、Shiro框架，开发的一套权限系统，极低门槛，拿来即用。</li>
             <li>设计之初，就非常注重安全性，为企业系统保驾护航，让一切都变得如此简单。</li>
@@ -30,8 +30,86 @@
         <ul>
             <li>高级群：324780204(大牛云集，跟大牛学习新技能)</li>
             <li>普通群：145799952(学习交流，互相解答各种疑问)</li>
-        </ul>
+        </ul>-->
+        <table class="table table-bordered" style="text-align: center">
+            <tbody>
+            <tr>
+                <td width="15%">系统名称</td>
+                <td width="35%">{{td_text1}}</td>
+                <td width="15%">JVM信息</td>
+                <td width="35%">{{td_text2}}</td>
+            </tr>
+            <tr>
+                <td>版本信息</td>
+                <td>{{td_text3}}</td>
+                <td>JVM版本</td>
+                <td>{{td_text4}}</td>
+            </tr>
+            <tr>
+                <td>操作系统</td>
+                <td>{{td_text5}}</td>
+                <td>JAVA_HOME</td>
+                <td>{{td_text6}}</td>
+            </tr>
+            <tr>
+                <td>系统架构</td>
+                <td>{{td_text7}}</td>
+                <td>工作目录</td>
+                <td>{{td_text8}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
+
+<script type="text/javascript" src="${request.contextPath}/statics/libs/jquery.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/statics/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="${request.contextPath}/statics/libs/vue.min.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el:'#main',
+        data:{
+            td_text1: '',
+            td_text2: '',
+            td_text3: '',
+            td_text4: '',
+            td_text5: '',
+            td_text6: '',
+            td_text7: '',
+            td_text8: ''
+        },
+        methods: {
+            initData: function (event) {
+                $.ajax({
+                    type: "POST",
+                    url: "sys/getSysInfo",
+                    data: null,
+                    dataType: "json",
+                    success: function(result){
+                        if(result.code == 0){//
+                            vm.td_text1 = result.td_text1;
+                            vm.td_text2 = result.td_text2;
+                            vm.td_text3 = result.td_text3;
+                            vm.td_text4 = result.td_text4;
+                            vm.td_text5 = result.td_text5;
+                            vm.td_text6 = result.td_text6;
+                            vm.td_text7 = result.td_text7;
+                            vm.td_text8 = result.td_text8;
+                        }else{
+
+                        }
+                    }
+                });
+            }
+        },
+        created: function () {
+            this.initData();
+        }
+    });
+
+</script>
+
+
 </body>
 </html>

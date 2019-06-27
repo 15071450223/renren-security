@@ -96,7 +96,7 @@ renren-security
 <br>
 
 - Eclipse、IDEA运行ApiApplication.java，则可启动项目【renren-api】
-- renren-api访问路径：http://localhost:8081/renren-api/swagger-ui.html
+- renren-api访问路径：http://localhost:8083/renren-api/swagger-ui.html
 
 <br>
 
